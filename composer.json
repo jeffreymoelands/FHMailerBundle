@@ -1,0 +1,24 @@
+{
+    "name": "freshheads/mailer-bundle",
+    "type": "symfony-bundle",
+    "description": "This bundle sends e-mails.",
+    "require": {
+        "php": "^7.2",
+        "symfony/config": "^4.3",
+        "symfony/dependency-injection": "^4.3",
+        "symfony/http-kernel": "^4.3",
+        "symfony/translation": "^4.3",
+        "symfony/twig-bridge": "^4.3",
+        "symfony/mailer": "^4.3",
+        "symfony/translation-contracts": "^1.1",
+        "twig/twig": "^2.0"
+    },
+    "autoload": {
+        "psr-4": { "FH\\MailerBundle\\": "src/" }
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-develop": "1.x-dev"
+        }
+    }
+}

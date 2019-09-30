@@ -1,0 +1,10 @@
+services:
+    _defaults:
+        autowire: true
+        autoconfigure: true
+
+    FH\MailerBundle\Email\Composer\EmailComposer:
+        abstract: true
+
+    FH\MailerBundle\Email\Composer\TemplatedEmailComposer:
+        abstract: true
