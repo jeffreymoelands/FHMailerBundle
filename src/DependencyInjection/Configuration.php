@@ -28,27 +28,16 @@ final class Configuration implements ConfigurationInterface
         $node
             ->children()
             ->arrayNode('message_composers')
-            ->useAttributeAsKey('identifier')
-            ->beforeNormalization()
-            ->ifArray()
-            ->then(static function ($v) {
-                foreach ($v as $key => $value) {
-                    if (is_string($value)) {
-                        $v[$key] = ['template' => $value];
-                    }
-                }
-
-                return $v;
-            })
-            ->end()
-            ->prototype('array')
-            ->children()
-            ->scalarNode('template')->isRequired()->end()
-            ->scalarNode('emogrifier_id')->cannotBeEmpty()->end()
-            ->append($this->getParticipantsNode())
-            ->end()
-            ->end()
-            ->end()
+                ->useAttributeAsKey('identifier')
+                    ->prototype('array')
+                        ->children()
+                            ->scalarNode('subject')->defaultNull()->end()
+                            ->scalarNode('htmlTemplate')->defaultNull()->end()
+                            ->scalarNode('textTemplate')->defaultNull()->end()
+                            ->append($this->getParticipantsNode())
+                        ->end()
+                    ->end()
+                ->end()
             ->end();
     }
 
@@ -58,13 +47,12 @@ final class Configuration implements ConfigurationInterface
 
         $node
             ->children()
-            ->append($this->getEmailNode('sender'))
-            ->append($this->getEmailNode('from'))
-            ->append($this->getEmailNode('to', true))
-            ->append($this->getEmailNode('cc', true))
-            ->append($this->getEmailNode('bcc', true))
-            ->scalarNode('subject')->defaultNull()->end()
-            ->scalarNode('htmlTemplate')->defaultNull()->end()
+                ->append($this->getEmailNode('sender'))
+                ->append($this->getEmailNode('from'))
+                ->append($this->getEmailNode('replyTo'))
+                ->append($this->getEmailNode('to', true))
+                ->append($this->getEmailNode('cc', true))
+                ->append($this->getEmailNode('bcc', true))
             ->end();
 
         return $node;
@@ -77,16 +65,16 @@ final class Configuration implements ConfigurationInterface
         if ($multiple) {
             $node
                 ->prototype('array')
-                ->children()
-                ->scalarNode('address')->isRequired()->end()
-                ->scalarNode('name')->cannotBeEmpty()->end()
-                ->end()
+                    ->children()
+                        ->scalarNode('address')->isRequired()->end()
+                        ->scalarNode('name')->cannotBeEmpty()->end()
+                    ->end()
                 ->end();
         } else {
             $node
                 ->children()
-                ->scalarNode('address')->isRequired()->end()
-                ->scalarNode('name')->cannotBeEmpty()->end()
+                    ->scalarNode('address')->isRequired()->end()
+                    ->scalarNode('name')->cannotBeEmpty()->end()
                 ->end();
         }
 
