@@ -30,7 +30,7 @@ final class EmailComposer implements ComposerInterface
             );
         }
 
-        (new ApplyEmailMessageOptions())->apply($message);
+        (new ApplyEmailMessageOptions())->apply($message, $this->messageOptions);
 
         return $message;
     }

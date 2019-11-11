@@ -30,7 +30,7 @@ final class TemplatedEmailComposer implements ComposerInterface
             );
         }
 
-        (new ApplyEmailMessageOptions())->apply($message);
+        (new ApplyEmailMessageOptions())->apply($message, $this->messageOptions);
         $this->applyTemplates($context, $message);
 
         return $message;
@@ -41,7 +41,7 @@ final class TemplatedEmailComposer implements ComposerInterface
         $message->context($context);
 
         if ($this->messageOptions->hasHtmlTemplate()) {
-            $message->htmlTemplate($this->messageOptions->hasHtmlTemplate());
+            $message->htmlTemplate($this->messageOptions->getHtmlTemplate());
         }
 
         if ($this->messageOptions->hasTextTemplate()) {

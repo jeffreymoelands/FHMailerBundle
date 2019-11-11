@@ -25,23 +25,23 @@ final class ApplyEmailMessageOptions
         }
 
         if ($participants->hasFrom()) {
-            $email->from($participants->getFrom());
+            $email->from(...$participants->getFrom());
         }
 
         if ($participants->hasReplyTo()) {
-            $email->replyTo($participants->getReplyTo());
+            $email->replyTo(...$participants->getReplyTo());
         }
 
         if ($participants->hasTo()) {
-            $email->to($participants->getTo());
+            $email->to(...$participants->getTo());
         }
 
         if ($participants->hasCc()) {
-            $email->cc($participants->getCc());
+            $email->cc(...$participants->getCc());
         }
 
         if ($participants->hasBcc()) {
-            $email->bcc($participants->getBcc());
+            $email->bcc(...$participants->getBcc());
         }
     }
 }

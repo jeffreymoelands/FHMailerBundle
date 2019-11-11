@@ -48,7 +48,7 @@ final class FHMailerExtension extends ConfigurableExtension
     ): void
     {
         $optionsId = $composerId . '._message_options';
-        $container->set($optionsId, $this->createMessageOptionsDefinition($messageOptions));
+        $container->setDefinition($optionsId, $this->createMessageOptionsDefinition($messageOptions));
 
         $composerDefinition = new ChildDefinition($composerClass);
         $composerDefinition->setArgument('$messageOptions', new Reference($optionsId));
