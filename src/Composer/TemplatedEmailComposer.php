@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace FH\Bundle\MailerBundle\Email\Composer;
+namespace FH\Bundle\MailerBundle\Composer;
 
 use FH\Bundle\MailerBundle\Email\MessageOptions;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;

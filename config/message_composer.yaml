@@ -3,8 +3,8 @@ services:
         autowire: true
         autoconfigure: true
 
-    FH\Bundle\MailerBundle\Email\Composer\EmailComposer:
+    FH\Bundle\MailerBundle\Composer\EmailComposer:
         abstract: true
 
-    FH\Bundle\MailerBundle\Email\Composer\TemplatedEmailComposer:
+    FH\Bundle\MailerBundle\Composer\TemplatedEmailComposer:
         abstract: true
