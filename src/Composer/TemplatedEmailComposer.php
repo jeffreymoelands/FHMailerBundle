@@ -7,19 +7,14 @@ use FH\Bundle\MailerBundle\Email\MessageOptions;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Component\Mailer\Exception\InvalidArgumentException;
 use Symfony\Component\Mime\RawMessage;
-use Twig\Environment;
 
 final class TemplatedEmailComposer implements ComposerInterface
 {
     private $messageOptions;
-    private $composer;
-    private $twig;
 
-    public function __construct(array $messageOptions, ?ComposerInterface $composer, Environment $twig)
+    public function __construct(MessageOptions $messageOptions)
     {
-        $this->messageOptions = MessageOptions::fromArray($messageOptions);
-        $this->composer = $composer;
-        $this->twig = $twig;
+        $this->messageOptions = $messageOptions;
     }
 
     /**
@@ -29,50 +24,28 @@ final class TemplatedEmailComposer implements ComposerInterface
     {
         $message = $message ?: new TemplatedEmail();
 
-        if ($this->composer instanceof ComposerInterface) {
-            $message = $this->composer->compose($context, $message);
-        }
-
         if (!$message instanceof TemplatedEmail) {
-            throw new InvalidArgumentException(sprintf('Expected instance of %s, instance of %s given', TemplatedEmail::class, get_class($message)));
+            throw new InvalidArgumentException(
+                sprintf('Expected instance of %s, instance of %s given', TemplatedEmail::class,  get_class($message))
+            );
         }
 
-        $this->applyHtmlTemplate($context, $message);
-        $this->applyTextTemplate($message);
+        (new ApplyEmailMessageOptions())->apply($message);
+        $this->applyTemplates($context, $message);
 
         return $message;
     }
 
-    private function applyHtmlTemplate(array $context, TemplatedEmail $message): void
+    private function applyTemplates(array $context, TemplatedEmail $message): void
     {
-        if (!$this->messageOptions->hasHtmlTemplate()) {
-            return;
+        $message->context($context);
+
+        if ($this->messageOptions->hasHtmlTemplate()) {
+            $message->htmlTemplate($this->messageOptions->hasHtmlTemplate())
         }
 
-        $template = $this->twig->load($this->messageOptions->getHtmlTemplate());
-
-        if ($template->hasBlock('subject')) {
-            $subject = $template->renderBlock('subject', $context);
-            $subject = strip_tags($subject);
-
-            $message->subject($subject);
+        if ($this->messageOptions->hasTextTemplate()) {
+            $message->textTemplate($this->messageOptions->getTextTemplate());
         }
-
-        if ($template->hasBlock('body_text')) {
-            $message->text($template->renderBlock('body_text', $context));
-        }
-
-        if ($template->hasBlock('body_html')) {
-            $message->html($template->renderBlock('body_html', $context));
-        }
-    }
-
-    private function applyTextTemplate(TemplatedEmail $message): void
-    {
-        if (!$this->messageOptions->hasTextTemplate()) {
-            return;
-        }
-
-        $message->textTemplate($this->messageOptions->getTextTemplate());
     }
 }

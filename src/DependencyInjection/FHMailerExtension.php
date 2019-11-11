@@ -36,19 +36,7 @@ final class FHMailerExtension extends ConfigurableExtension
         array $messageOptions
     ): void
     {
-        $emailComposerId = $composerId . '._email';
-        $this->registerEmailComposer($container, $emailComposerId, $messageOptions);
-
-        $this->registerComposer($container, $messageOptions, TemplatedEmailComposer::class, $composerId, $emailComposerId);
-    }
-
-    private function registerEmailComposer(
-        ContainerInterface $container,
-        string $composerId,
-        array $messageOptions
-    ): void
-    {
-        $this->registerComposer($container, $messageOptions, EmailComposer::class, $composerId);
+        $this->registerComposer($container, $messageOptions, TemplatedEmailComposer::class, $composerId);
     }
 
     private function registerComposer(
