@@ -3,18 +3,21 @@ declare(strict_types=1);
 
 namespace FH\MailerBundle\Email\Composer;
 
+use FH\MailerBundle\Email\MessageOptions;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Component\Mailer\Exception\InvalidArgumentException;
 use Symfony\Component\Mime\RawMessage;
 use Twig\Environment;
 
-class TemplatedEmailComposer implements ComposerInterface
+final class TemplatedEmailComposer implements ComposerInterface
 {
+    private $messageOptions;
     private $composer;
     private $twig;
 
-    public function __construct(?ComposerInterface $composer, Environment $twig)
+    public function __construct(array $messageOptions, ?ComposerInterface $composer, Environment $twig)
     {
+        $this->messageOptions = MessageOptions::fromArray($messageOptions);
         $this->composer = $composer;
         $this->twig = $twig;
     }
@@ -34,7 +37,19 @@ class TemplatedEmailComposer implements ComposerInterface
             throw new InvalidArgumentException(sprintf('Expected instance of %s, instance of %s given', TemplatedEmail::class, get_class($message)));
         }
 
-        $template = $this->twig->load($context['template']);
+        $this->applyHtmlTemplate($context, $message);
+        $this->applyTextTemplate($message);
+
+        return $message;
+    }
+
+    private function applyHtmlTemplate(array $context, TemplatedEmail $message): void
+    {
+        if (!$this->messageOptions->hasHtmlTemplate()) {
+            return;
+        }
+
+        $template = $this->twig->load($this->messageOptions->getHtmlTemplate());
 
         if ($template->hasBlock('subject')) {
             $subject = $template->renderBlock('subject', $context);
@@ -50,7 +65,14 @@ class TemplatedEmailComposer implements ComposerInterface
         if ($template->hasBlock('body_html')) {
             $message->html($template->renderBlock('body_html', $context));
         }
+    }
 
-        return $message;
+    private function applyTextTemplate(TemplatedEmail $message): void
+    {
+        if (!$this->messageOptions->hasTextTemplate()) {
+            return;
+        }
+
+        $message->textTemplate($this->messageOptions->getTextTemplate());
     }
 }

@@ -3,16 +3,19 @@ declare(strict_types=1);
 
 namespace FH\MailerBundle\Email\Composer;
 
+use FH\MailerBundle\Email\MessageOptions;
 use Symfony\Component\Mailer\Exception\InvalidArgumentException;
 use Symfony\Component\Mime\Email;
 use Symfony\Component\Mime\RawMessage;
 
-class EmailComposer implements ComposerInterface
+final class EmailComposer implements ComposerInterface
 {
+    private $messageOptions;
     private $composer;
 
-    public function __construct(?ComposerInterface $composer)
+    public function __construct(array $messageOptions, ?ComposerInterface $composer)
     {
+        $this->messageOptions = MessageOptions::fromArray($messageOptions);
         $this->composer = $composer;
     }
 
@@ -31,26 +34,47 @@ class EmailComposer implements ComposerInterface
             throw new InvalidArgumentException(sprintf('Expected instance of %s, instance of %s given', Email::class, get_class($message)));
         }
 
-        if (array_key_exists('subject', $context) && !is_string($message->getSubject())) {
-            $message->subject($context['subject']);
-        }
-
-        if (array_key_exists('from', $context)) {
-            $message->from($context['from']);
-        }
-
-        if (array_key_exists('to', $context)) {
-            $message->to($context['to']);
-        }
-
-        if (array_key_exists('cc', $context)) {
-            $message->cc($context['cc']);
-        }
-
-        if (array_key_exists('bcc', $context)) {
-            $message->bcc($context['bcc']);
-        }
+        $this->applySubject($message);
+        $this->applyParticipants($message);
 
         return $message;
+    }
+
+    private function applySubject(Email $message): void
+    {
+        if (!$this->messageOptions->hasSubject()) {
+            return;
+        }
+
+        $message->subject($this->messageOptions->getSubject());
+    }
+
+    private function applyParticipants(Email $message): void
+    {
+        $participants = $this->messageOptions->getParticipants();
+
+        if ($participants->hasSender()) {
+            $message->sender($participants->getSender());
+        }
+
+        if ($participants->hasFrom()) {
+            $message->from($participants->getFrom());
+        }
+
+        if ($participants->hasReplyTo()) {
+            $message->replyTo($participants->getReplyTo());
+        }
+
+        if ($participants->hasTo()) {
+            $message->to($participants->getTo());
+        }
+
+        if ($participants->hasCc()) {
+            $message->cc($participants->getCc());
+        }
+
+        if ($participants->hasBcc()) {
+            $message->bcc($participants->getBcc());
+        }
     }
 }
