@@ -41,7 +41,7 @@ final class TemplatedEmailComposer implements ComposerInterface
         $message->context($context);
 
         if ($this->messageOptions->hasHtmlTemplate()) {
-            $message->htmlTemplate($this->messageOptions->hasHtmlTemplate())
+            $message->htmlTemplate($this->messageOptions->hasHtmlTemplate());
         }
 
         if ($this->messageOptions->hasTextTemplate()) {
