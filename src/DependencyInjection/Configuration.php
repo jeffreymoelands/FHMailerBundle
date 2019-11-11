@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace FH\Bundle\MailerBundle\DependencyInjection;
 
-use FH\Bundle\MailerBundle\Email\Composer\ComposerIdentifiers;
+use FH\Bundle\MailerBundle\Composer\ComposerIdentifiers;
 use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
@@ -47,8 +47,8 @@ final class Configuration implements ConfigurationInterface
         $node
             ->children()
                 ->append($this->getEmailNode('sender'))
-                ->append($this->getEmailNode('from'))
-                ->append($this->getEmailNode('reply_to'))
+                ->append($this->getEmailNode('from', true))
+                ->append($this->getEmailNode('reply_to', true))
                 ->append($this->getEmailNode('to', true))
                 ->append($this->getEmailNode('cc', true))
                 ->append($this->getEmailNode('bcc', true))
@@ -71,7 +71,6 @@ final class Configuration implements ConfigurationInterface
                 ->end();
         } else {
             $node
-                ->canBeDisabled()
                 ->children()
                     ->scalarNode('address')->isRequired()->end()
                     ->scalarNode('name')->cannotBeEmpty()->end()

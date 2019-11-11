@@ -17,22 +17,22 @@ final class Participants
 
     public static function fromArray(array $participants): self
     {
-        $function = static function (array $address) {
+        $createAddress = static function (array $address) {
             return self::createAddress($address);
         };
 
         return new self(
-            $participants['sender'] ? self::createAddress($participants['sender']) : null,
-            array_map($function, $participants['from']),
-            array_map($function, $participants['reply_to']),
-            array_map($function, $participants['to']),
-            array_map($function, $participants['cc']),
-            array_map($function, $participants['bcc'])
+            isset($participants['sender']) && is_array($participants['sender']) ? self::createAddress($participants['sender']) : null,
+            array_map($createAddress, $participants['from'] ?? []),
+            array_map($createAddress, $participants['reply_to'] ?? []),
+            array_map($createAddress, $participants['to'] ?? []),
+            array_map($createAddress, $participants['cc'] ?? []),
+            array_map($createAddress, $participants['bcc'] ?? [])
         );
     }
 
     public function __construct(
-        ?Address $sender,
+        Address $sender = null,
         array $from = [],
         array $replyTo = [],
         array $to = [],
