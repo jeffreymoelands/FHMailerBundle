@@ -1,11 +1,11 @@
 <?php
 declare(strict_types=1);
 
-namespace FH\MailerBundle\Tests\DependencyInjection;
+namespace FH\Bundle\MailerBundle\Tests\DependencyInjection;
 
-use FH\MailerBundle\DependencyInjection\FHMailerExtension;
-use FH\MailerBundle\Email\Composer\EmailComposer;
-use FH\MailerBundle\Email\Composer\TemplatedEmailComposer;
+use FH\Bundle\MailerBundle\DependencyInjection\FHMailerExtension;
+use FH\Bundle\MailerBundle\Email\Composer\EmailComposer;
+use FH\Bundle\MailerBundle\Email\Composer\TemplatedEmailComposer;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 

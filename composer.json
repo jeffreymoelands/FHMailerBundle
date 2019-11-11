@@ -45,11 +45,11 @@
         "sort-packages": true
     },
     "autoload": {
-        "psr-4": { "FH\\MailerBundle\\": "src/" }
+        "psr-4": { "FH\\Bundle\\MailerBundle\\": "src/" }
     },
     "autoload-dev": {
         "psr-4": {
-            "FH\\MailerBundle\\Tests\\": "tests/"
+            "FH\\Bundle\\MailerBundle\\Tests\\": "tests/"
         }
     },
     "extra": {

@@ -1,9 +1,9 @@
 <?php
 declare(strict_types=1);
 
-namespace FH\MailerBundle\Email\Composer;
+namespace FH\Bundle\MailerBundle\Email\Composer;
 
-use FH\MailerBundle\Email\MessageOptions;
+use FH\Bundle\MailerBundle\Email\MessageOptions;
 use Symfony\Component\Mailer\Exception\InvalidArgumentException;
 use Symfony\Component\Mime\Email;
 use Symfony\Component\Mime\RawMessage;

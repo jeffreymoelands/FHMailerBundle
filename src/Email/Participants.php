@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace FH\MailerBundle\Email;
+namespace FH\Bundle\MailerBundle\Email;
 
 use Symfony\Component\Mime\Address;
 use Symfony\Component\Mime\NamedAddress;

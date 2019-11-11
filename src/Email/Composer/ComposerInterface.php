@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace FH\MailerBundle\Email\Composer;
+namespace FH\Bundle\MailerBundle\Email\Composer;
 
 use Symfony\Component\Mime\RawMessage;
 

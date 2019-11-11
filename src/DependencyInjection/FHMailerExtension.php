@@ -1,12 +1,12 @@
 <?php
 declare(strict_types=1);
 
-namespace FH\MailerBundle\DependencyInjection;
+namespace FH\Bundle\MailerBundle\DependencyInjection;
 
-use FH\MailerBundle\Email\Composer\ComposerIdentifiers;
-use FH\MailerBundle\Email\Composer\EmailComposer;
-use FH\MailerBundle\Email\Composer\TemplatedEmailComposer;
-use FH\MailerBundle\Email\MessageOptions;
+use FH\Bundle\MailerBundle\Email\Composer\ComposerIdentifiers;
+use FH\Bundle\MailerBundle\Email\Composer\EmailComposer;
+use FH\Bundle\MailerBundle\Email\Composer\TemplatedEmailComposer;
+use FH\Bundle\MailerBundle\Email\MessageOptions;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ChildDefinition;
 use Symfony\Component\DependencyInjection\ContainerBuilder;

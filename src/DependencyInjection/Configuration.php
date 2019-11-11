@@ -1,9 +1,9 @@
 <?php
 declare(strict_types=1);
 
-namespace FH\MailerBundle\DependencyInjection;
+namespace FH\Bundle\MailerBundle\DependencyInjection;
 
-use FH\MailerBundle\Email\Composer\ComposerIdentifiers;
+use FH\Bundle\MailerBundle\Email\Composer\ComposerIdentifiers;
 use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;

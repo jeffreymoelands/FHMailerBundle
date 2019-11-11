@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace FH\MailerBundle\Command;
+namespace FH\Bundle\MailerBundle\Command;
 
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
