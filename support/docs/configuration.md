@@ -1,7 +1,10 @@
 Configuration
 -------------
-
 ```
+framework:
+    mailer:
+        dsn: 'plainsmtp://127.0.0.1'
+
 fh_mailer:
     templated_email:
         consumer_welcome:
