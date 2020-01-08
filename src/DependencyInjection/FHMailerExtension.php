@@ -5,6 +5,7 @@ namespace FH\Bundle\MailerBundle\DependencyInjection;
 
 use Exception;
 use FH\Bundle\MailerBundle\Composer\ComposerIdentifiers;
+use FH\Bundle\MailerBundle\Composer\EmailComposer;
 use FH\Bundle\MailerBundle\Composer\TemplatedEmailComposer;
 use FH\Bundle\MailerBundle\Email\MessageOptions;
 use Symfony\Component\Config\FileLocator;
@@ -18,8 +19,6 @@ use Symfony\Component\HttpKernel\DependencyInjection\ConfigurableExtension;
 final class FHMailerExtension extends ConfigurableExtension
 {
     /**
-     * @param string[] $configs
-     * @param ContainerBuilder $container
      * @throws Exception
      */
     public function loadInternal(array $configs, ContainerBuilder $container): void
@@ -32,6 +31,12 @@ final class FHMailerExtension extends ConfigurableExtension
             $composerId = $this->createComposerId($name, ComposerIdentifiers::TEMPLATED_EMAIL);
 
             $this->registerTemplatedEmailComposer($container, $composerId, $messageOptions);
+        }
+
+        foreach ($configs[ComposerIdentifiers::EMAIL] as $name => $messageOptions) {
+            $composerId = $this->createComposerId($name, ComposerIdentifiers::EMAIL);
+
+            $this->registerEmailComposer($container, $composerId, $messageOptions);
         }
     }
 
@@ -50,27 +55,34 @@ final class FHMailerExtension extends ConfigurableExtension
 
     /**
      * @param ContainerBuilder $container
+     * @param string $composerId
+     * @param string[] $messageOptions
+     */
+    private function registerEmailComposer(
+        ContainerBuilder $container,
+        string $composerId,
+        array $messageOptions
+    ): void {
+        $this->registerComposer($container, $messageOptions, EmailComposer::class, $composerId);
+    }
+
+    /**
+     * @param ContainerBuilder $container
      * @param string[] $messageOptions
      * @param string $composerClass
      * @param string $composerId
-     * @param string|null $chainedComposerId
      */
     private function registerComposer(
         ContainerBuilder $container,
         array $messageOptions,
         string $composerClass,
-        string $composerId,
-        string $chainedComposerId = null
+        string $composerId
     ): void {
-        $optionsId = $composerId . '._message_options';
+        $optionsId = "$composerId._message_options";
         $container->setDefinition($optionsId, $this->createMessageOptionsDefinition($messageOptions));
 
         $composerDefinition = new ChildDefinition($composerClass);
         $composerDefinition->setArgument('$messageOptions', new Reference($optionsId));
-
-        if (is_string($chainedComposerId)) {
-            $composerDefinition->setArgument('$composer', new Reference($chainedComposerId));
-        }
 
         $container->setDefinition($composerId, $composerDefinition);
     }

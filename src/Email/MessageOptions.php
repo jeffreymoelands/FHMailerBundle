@@ -14,8 +14,8 @@ final class MessageOptions
     {
         return new self(
             $messageOptions['subject'],
-            $messageOptions['html_template'],
-            $messageOptions['text_template'],
+            $messageOptions['html_template'] ?? null,
+            $messageOptions['text_template'] ?? null,
             Participants::fromArray($messageOptions['participants'])
         );
     }
