@@ -14,13 +14,19 @@
         {
             "name": "Kevin Schuurmans",
             "email": "kevin.schuurmans@freshheads.com",
-            "homepage": "https://freshheads.com",
+            "homepage": "https://freshheads.dev",
             "role": "Developer"
         },
         {
             "name": "Misha Klomp",
             "email": "misha.klomp@freshheads.com",
-            "homepage": "https://freshheads.com",
+            "homepage": "https://freshheads.dev",
+            "role": "Developer"
+        },
+        {
+            "name": "Joris van de Sande",
+            "email": "joris.van.de.sande@freshheads.com",
+            "homepage": "https://freshheads.dev",
             "role": "Developer"
         }
     ],
