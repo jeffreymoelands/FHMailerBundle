@@ -4,7 +4,7 @@ Installation
 Install with Composer:
 
 ```bash
-composer require freshheads/mailer-bundle
+composer require freshheads/mailer-bundle symfony/mailer
 ```
 
 Register the bundle:
