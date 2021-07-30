@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace FH\Bundle\MailerBundle\DependencyInjection;
@@ -23,7 +24,7 @@ final class FHMailerExtension extends ConfigurableExtension
      */
     public function loadInternal(array $configs, ContainerBuilder $container): void
     {
-        $fileLoader = (new YamlFileLoader($container, new FileLocator(__DIR__ . '/../../config')));
+        $fileLoader = (new YamlFileLoader($container, new FileLocator(__DIR__.'/../../config')));
         $fileLoader->load('message_composer.yaml');
         $fileLoader->load('transport.yaml');
 
@@ -41,8 +42,6 @@ final class FHMailerExtension extends ConfigurableExtension
     }
 
     /**
-     * @param ContainerBuilder $container
-     * @param string $composerId
      * @param string[] $messageOptions
      */
     private function registerTemplatedEmailComposer(
@@ -54,8 +53,6 @@ final class FHMailerExtension extends ConfigurableExtension
     }
 
     /**
-     * @param ContainerBuilder $container
-     * @param string $composerId
      * @param string[] $messageOptions
      */
     private function registerEmailComposer(
@@ -67,10 +64,7 @@ final class FHMailerExtension extends ConfigurableExtension
     }
 
     /**
-     * @param ContainerBuilder $container
      * @param string[] $messageOptions
-     * @param string $composerClass
-     * @param string $composerId
      */
     private function registerComposer(
         ContainerBuilder $container,

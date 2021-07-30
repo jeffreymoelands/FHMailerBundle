@@ -1,11 +1,12 @@
 <?php
+
 declare(strict_types=1);
 
 namespace FH\Bundle\MailerBundle\Tests\DependencyInjection;
 
-use FH\Bundle\MailerBundle\DependencyInjection\FHMailerExtension;
 use FH\Bundle\MailerBundle\Composer\EmailComposer;
 use FH\Bundle\MailerBundle\Composer\TemplatedEmailComposer;
+use FH\Bundle\MailerBundle\DependencyInjection\FHMailerExtension;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Exception\ServiceNotFoundException;
@@ -18,7 +19,7 @@ final class FHMailerExtensionTest extends TestCase
     private $container;
     private $extension;
 
-    public function setUp(): void
+    protected function setUp(): void
     {
         $this->container = new ContainerBuilder();
         $this->extension = new FHMailerExtension();
@@ -57,12 +58,12 @@ final class FHMailerExtensionTest extends TestCase
         $this->assertCount(0, $emailDefinition->getErrors());
         $this->assertInstanceOf(EmailComposer::class, $emailService);
 
-        $this->assertEquals(
-            (string)$templatedEmailDefinition->getArgument('$messageOptions'),
+        $this->assertSame(
+            (string) $templatedEmailDefinition->getArgument('$messageOptions'),
             'fh_mailer.composer.templated_email.to_ms_test._message_options'
         );
-        $this->assertEquals(
-            (string)$emailDefinition->getArgument('$messageOptions'),
+        $this->assertSame(
+            (string) $emailDefinition->getArgument('$messageOptions'),
             'fh_mailer.composer.email.to_ms_test._message_options'
         );
     }
@@ -88,8 +89,8 @@ final class FHMailerExtensionTest extends TestCase
                                     'address' => 'test@freshheads.com',
                                 ],
                             ],
-                        ]
-                    ]
+                        ],
+                    ],
                 ],
                 'email' => [
                     'to_ms_test' => [
@@ -107,10 +108,10 @@ final class FHMailerExtensionTest extends TestCase
                                     'address' => 'test@freshheads.com',
                                 ],
                             ],
-                        ]
-                    ]
-                ]
-            ]
+                        ],
+                    ],
+                ],
+            ],
         ];
     }
 }

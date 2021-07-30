@@ -1,9 +1,9 @@
 <?php
+
 declare(strict_types=1);
 
 namespace FH\Bundle\MailerBundle\Tests\Email;
 
-use FH\Bundle\MailerBundle\Email\MessageOptions;
 use FH\Bundle\MailerBundle\Email\Participants;
 use PHPUnit\Framework\TestCase;
 

@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace FH\Bundle\MailerBundle\Transport\Smtp;
@@ -16,7 +17,7 @@ final class PlainSmtpTransportFactory extends AbstractTransportFactory
      */
     protected function getSupportedSchemes(): array
     {
-        return [ 'plainsmtp' ];
+        return ['plainsmtp'];
     }
 
     /**

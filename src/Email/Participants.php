@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace FH\Bundle\MailerBundle\Email;
@@ -21,7 +22,7 @@ final class Participants
         };
 
         return new self(
-            isset($participants['sender']) && is_array($participants['sender']) ? self::createAddress($participants['sender']) : null,
+            isset($participants['sender']) && \is_array($participants['sender']) ? self::createAddress($participants['sender']) : null,
             array_map($createAddress, $participants['from'] ?? []),
             array_map($createAddress, $participants['reply_to'] ?? []),
             array_map($createAddress, $participants['to'] ?? []),
