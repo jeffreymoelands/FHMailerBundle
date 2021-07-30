@@ -4,15 +4,27 @@ declare(strict_types=1);
 
 namespace FH\Bundle\MailerBundle\Email;
 
+use FH\Bundle\MailerBundle\Exception\InvalidArgumentException;
 use Symfony\Component\Mime\Address;
 
 final class Participants
 {
+    /** @var Address|null */
     private $sender;
+
+    /** @var array */
     private $from;
+
+    /** @var array */
     private $replyTo;
+
+    /** @var array */
     private $to;
+
+    /** @var array */
     private $cc;
+
+    /** @var array */
     private $bcc;
 
     public static function fromArray(array $participants): self
@@ -47,8 +59,12 @@ final class Participants
         $this->bcc = $bcc;
     }
 
-    public function getSender(): ?Address
+    public function getSender(): Address
     {
+        if (!$this->sender instanceof Address) {
+            throw new InvalidArgumentException('Invalid sender');
+        }
+
         return $this->sender;
     }
 

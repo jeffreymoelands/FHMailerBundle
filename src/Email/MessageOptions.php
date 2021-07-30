@@ -4,11 +4,20 @@ declare(strict_types=1);
 
 namespace FH\Bundle\MailerBundle\Email;
 
+use FH\Bundle\MailerBundle\Exception\InvalidArgumentException;
+
 final class MessageOptions
 {
+    /** @var string|null */
     private $subject;
+
+    /** @var string|null */
     private $htmlTemplate;
+
+    /** @var string|null */
     private $textTemplate;
+
+    /** @var Participants */
     private $participants;
 
     public static function fromArray(array $messageOptions): self
@@ -33,8 +42,12 @@ final class MessageOptions
         $this->participants = $participants;
     }
 
-    public function getSubject(): ?string
+    public function getSubject(): string
     {
+        if (!\is_string($this->subject)) {
+            throw new InvalidArgumentException('Invalid subject');
+        }
+
         return $this->subject;
     }
 

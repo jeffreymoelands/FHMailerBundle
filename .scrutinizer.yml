@@ -26,6 +26,7 @@ build:
     dependencies:
         override:
             - composer install --no-interaction --prefer-dist
+            - composer update --working-dir=.tools/php-cs-fixer
 
 checks:
     php: true

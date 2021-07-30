@@ -12,6 +12,7 @@ use PHPUnit\Framework\TestCase;
  */
 final class ParticipantsOptionsTest extends TestCase
 {
+    /** @var Participants */
     private $participants;
 
     protected function setUp(): void

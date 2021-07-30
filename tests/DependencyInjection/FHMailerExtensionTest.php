@@ -16,7 +16,10 @@ use Symfony\Component\DependencyInjection\Exception\ServiceNotFoundException;
  */
 final class FHMailerExtensionTest extends TestCase
 {
+    /** @var ContainerBuilder */
     private $container;
+
+    /** @var FHMailerExtension */
     private $extension;
 
     protected function setUp(): void

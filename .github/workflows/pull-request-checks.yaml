@@ -30,9 +30,12 @@ jobs:
       - name: Run Composer linter
         run: composer validate --strict --no-check-lock
 
+      - name: Run phpstan
+        run: composer run-script phpstan
+
       - name: Run lint PHP
-        run: .tools/php-cs-fixer/vendor/bin/php-cs-fixer fix --ansi --verbose --diff --dry-run
+        run: composer run-script php-lint
 
       # Tests
       - name: Run PHP unit test suite
-        run: vendor/bin/simple-phpunit -v -c .
+        run: composer run-script test
