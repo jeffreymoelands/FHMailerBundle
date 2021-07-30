@@ -12,6 +12,7 @@ use PHPUnit\Framework\TestCase;
  */
 final class MessageOptionsTest extends TestCase
 {
+    /** @var MessageOptions */
     private $messageOptions;
 
     protected function setUp(): void

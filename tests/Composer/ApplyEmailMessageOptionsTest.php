@@ -16,8 +16,13 @@ use Symfony\Component\Mime\Address;
  */
 final class ApplyEmailMessageOptionsTest extends TestCase
 {
+    /** @var MessageOptions */
     private $messageOptions;
+
+    /** @var ApplyEmailMessageOptions */
     private $applyEmailMessageOptions;
+
+    /** @var TemplatedEmail */
     private $assertEmail;
 
     protected function setUp(): void
@@ -55,6 +60,12 @@ final class ApplyEmailMessageOptionsTest extends TestCase
     {
         $email = new TemplatedEmail();
         $this->applyEmailMessageOptions->apply($email, $this->messageOptions);
-        $this->assertEquals($this->assertEmail, $email);
+
+        $this->assertSame($this->assertEmail->getSubject(), $email->getSubject());
+        $this->assertSame($this->assertEmail->getSender(), $email->getSender());
+        $this->assertSame($this->assertEmail->getFrom(), $email->getFrom());
+        $this->assertSame($this->assertEmail->getTo(), $email->getTo());
+        $this->assertSame($this->assertEmail->getCc(), $email->getCc());
+        $this->assertSame($this->assertEmail->getBcc(), $email->getBcc());
     }
 }

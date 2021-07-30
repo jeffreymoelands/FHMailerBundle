@@ -27,7 +27,7 @@ final class PlainSmtpTransportFactory extends AbstractTransportFactory
     {
         $stream = new SocketStream();
         $stream->disableTls();
-        $stream->setPort($dsn->getPort(25));
+        $stream->setPort((int) $dsn->getPort(25));
         $stream->setHost($dsn->getHost());
 
         return new SmtpTransport($stream, $this->dispatcher, $this->logger);

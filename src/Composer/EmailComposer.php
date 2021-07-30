@@ -9,6 +9,7 @@ use Symfony\Component\Mime\Email;
 
 final class EmailComposer implements ComposerInterface
 {
+    /** @var MessageOptions */
     private $messageOptions;
 
     public function __construct(MessageOptions $messageOptions)

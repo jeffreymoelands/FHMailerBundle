@@ -16,9 +16,16 @@ use Symfony\Component\Mime\Email;
  */
 final class EmailComposerTest extends TestCase
 {
+    /** @var Address */
     private $sender;
+
+    /** @var Address */
     private $to;
+
+    /** @var MessageOptions */
     private $messageOptions;
+
+    /** @var EmailComposer */
     private $emailComposer;
 
     protected function setUp(): void

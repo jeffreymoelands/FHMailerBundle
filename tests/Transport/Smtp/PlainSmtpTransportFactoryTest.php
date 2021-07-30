@@ -15,6 +15,7 @@ use Symfony\Component\Mailer\Transport\Smtp\Stream\SocketStream;
  */
 final class PlainSmtpTransportFactoryTest extends TestCase
 {
+    /** @var PlainSmtpTransportFactory */
     private $factory;
 
     protected function setUp(): void

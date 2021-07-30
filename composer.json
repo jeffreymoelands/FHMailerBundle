@@ -31,7 +31,7 @@
         }
     ],
     "require": {
-        "php": ">=7.2",
+        "php": ">=7.3",
         "symfony/config": "^4.4|^5.0",
         "symfony/console": "^4.4|^5.0",
         "symfony/dependency-injection": "^4.4|^5.0",
@@ -60,7 +60,9 @@
         }
     },
     "scripts": {
-        "test": "vendor/bin/simple-phpunit --colors=always --testdox"
+        "test": "vendor/bin/simple-phpunit --colors=always --testdox",
+        "phpstan": "composer install --working-dir=.tools/phpstan && .tools/phpstan/vendor/bin/phpstan --memory-limit=4G analyse -c phpstan.neon",
+        "php-lint": "composer update --working-dir=.tools/php-cs-fixer && .tools/php-cs-fixer/vendor/bin/php-cs-fixer fix --ansi --verbose --diff --dry-run"
     },
     "support": {
         "issues": "https://github.com/freshheads/FHMailerBundle/issues"
