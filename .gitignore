@@ -2,6 +2,8 @@
 /composer.lock
 .phpunit.result.cache
 .php_cs.cache
+/.tools/*/vendor
+/.tools/*/composer.lock
 
 # Phpstorm project configuration files
 /.idea

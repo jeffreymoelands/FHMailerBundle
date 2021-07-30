@@ -35,4 +35,4 @@ jobs:
 
       # Tests
       - name: Run PHP unit test suite
-        run: vendor/bin/phpunit -v -c .
+        run: vendor/bin/simple-phpunit -v -c .
