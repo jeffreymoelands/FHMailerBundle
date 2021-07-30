@@ -15,7 +15,7 @@ final class ApplyEmailMessageOptions
         $this->applyParticipants($email, $messageOptions->getParticipants());
 
         if ($messageOptions->hasSubject()) {
-            $email->subject($messageOptions->getSubject());
+            $email->subject((string) $messageOptions->getSubject());
         }
     }
 
