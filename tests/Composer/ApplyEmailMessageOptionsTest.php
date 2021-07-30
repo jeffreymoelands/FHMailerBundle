@@ -55,7 +55,6 @@ final class ApplyEmailMessageOptionsTest extends TestCase
     {
         $email = new TemplatedEmail();
         $this->applyEmailMessageOptions->apply($email, $this->messageOptions);
-
-        $this->assertSame($this->assertEmail, $email);
+        $this->assertEquals($this->assertEmail, $email);
     }
 }
