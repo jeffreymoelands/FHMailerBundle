@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace FH\Bundle\MailerBundle\Composer;
@@ -24,9 +25,7 @@ final class TemplatedEmailComposer implements ComposerInterface
     {
         $message = $message ?? new TemplatedEmail();
         if (!$message instanceof TemplatedEmail) {
-            throw new InvalidArgumentException(
-                sprintf('Expected instance of %s, instance of %s given', TemplatedEmail::class,  get_class($message))
-            );
+            throw new InvalidArgumentException(sprintf('Expected instance of %s, instance of %s given', TemplatedEmail::class, \get_class($message)));
         }
 
         (new ApplyEmailMessageOptions())->apply($message, $this->messageOptions);

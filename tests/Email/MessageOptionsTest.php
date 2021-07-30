@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace FH\Bundle\MailerBundle\Tests\Email;
@@ -50,7 +51,7 @@ final class MessageOptionsTest extends TestCase
                         'address' => 'test2@freshheads.com',
                     ],
                 ],
-        ]]);
+        ], ]);
     }
 
     public function testFromArray(): void

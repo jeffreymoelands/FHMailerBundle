@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace FH\Bundle\MailerBundle\Tests\Composer;
@@ -55,6 +56,6 @@ final class ApplyEmailMessageOptionsTest extends TestCase
         $email = new TemplatedEmail();
         $this->applyEmailMessageOptions->apply($email, $this->messageOptions);
 
-        $this->assertEquals($this->assertEmail, $email);
+        $this->assertSame($this->assertEmail, $email);
     }
 }

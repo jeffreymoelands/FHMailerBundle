@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace FH\Bundle\MailerBundle\Tests\Transport\Smtp;
@@ -14,7 +15,6 @@ use Symfony\Component\Mailer\Transport\Smtp\Stream\SocketStream;
  */
 final class PlainSmtpTransportFactoryTest extends TestCase
 {
-
     private $factory;
 
     protected function setUp(): void
@@ -48,8 +48,8 @@ final class PlainSmtpTransportFactoryTest extends TestCase
         $stream = $transport->getStream();
 
         $this->assertInstanceOf(SmtpTransport::class, $transport);
-        $this->assertEquals('localhost', $stream->getHost());
-        $this->assertEquals(25, $stream->getPort());
+        $this->assertSame('localhost', $stream->getHost());
+        $this->assertSame(25, $stream->getPort());
         $this->assertFalse($stream->isTLS(), 'TLS should not be enabled');
     }
 
@@ -61,8 +61,8 @@ final class PlainSmtpTransportFactoryTest extends TestCase
         $stream = $transport->getStream();
 
         $this->assertInstanceOf(SmtpTransport::class, $transport);
-        $this->assertEquals('localhost', $stream->getHost());
-        $this->assertEquals(30, $stream->getPort());
+        $this->assertSame('localhost', $stream->getHost());
+        $this->assertSame(30, $stream->getPort());
         $this->assertFalse($stream->isTLS(), 'TLS should not be enabled');
     }
 }

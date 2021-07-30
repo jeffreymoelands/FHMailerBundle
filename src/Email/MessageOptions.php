@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace FH\Bundle\MailerBundle\Email;
@@ -39,7 +40,7 @@ final class MessageOptions
 
     public function hasSubject(): bool
     {
-        return is_string($this->subject);
+        return \is_string($this->subject);
     }
 
     public function getHtmlTemplate(): ?string
@@ -49,7 +50,7 @@ final class MessageOptions
 
     public function hasHtmlTemplate(): bool
     {
-        return is_string($this->htmlTemplate);
+        return \is_string($this->htmlTemplate);
     }
 
     public function getTextTemplate(): ?string
@@ -59,7 +60,7 @@ final class MessageOptions
 
     public function hasTextTemplate(): bool
     {
-        return is_string($this->textTemplate);
+        return \is_string($this->textTemplate);
     }
 
     public function getParticipants(): Participants

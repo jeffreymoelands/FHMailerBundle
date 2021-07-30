@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace FH\Bundle\MailerBundle\Composer;
@@ -15,9 +16,6 @@ final class EmailComposer implements ComposerInterface
         $this->messageOptions = $messageOptions;
     }
 
-    /**
-     * @return Email
-     */
     public function compose(array $context = [], Email $message = null): Email
     {
         $message = $message ?: new Email();
